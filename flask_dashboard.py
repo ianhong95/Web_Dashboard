@@ -26,8 +26,7 @@ def update_weather():
 
     # res = request.form.get('city_id')
     res = request.get_json('city_id')
-    print(type(res))
-    print(res)
+
     city_id = res['city_id']
 
     weather_res = requests.get(f'http://api.openweathermap.org/data/2.5/weather?id={city_id}&appid={weather_api_key}&units={units}')
