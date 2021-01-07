@@ -5,24 +5,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function update() {
-    // JavaScript object to make an AJAX request
-    const request = new XMLHttpRequest();
     var city_id = document.getElementById('select-city').value;
 
-    // Initialize a new request
-    request.open('POST', '/');
+    fetch('/', {    // Send a request to Flask server (POST request), passing city_id as a JSON object
 
-    // Define the action to execute when the request returns a response
-    request.onload = () => {
-        // Get JSON data from request response
-        const response = JSON.parse(request.responseText);
+        headers: {'Content-Type': 'application/json'},
+        method: 'POST',
+        body: JSON.stringify({'city_id': city_id})
 
-        // const weather_icon
-        const weather_desc = `${response.weather_desc}`;
-        const temp_now = `${response.temp_now}`;
-        const feels_like = `${response.feels_like}`;
+    }).then(function(response) {    // Get the response from Flask server
+        return response.json();
+    }).then(function (json) {   // Run the following function with the json response from Python
+        
+        // Assign values from json response to variables
+        const weather_desc = json.weather_desc;
+        const temp_now = json.temp_now;
+        const feels_like = json.feels_like;
         var weather_icon;
 
+        // Weather icon logic
         if (weather_desc.includes('Sun')) {
             weather_icon = '/static/images/sunny.jpg'
         } else if (weather_desc.includes('Cloud')) {
@@ -33,17 +34,10 @@ function update() {
             weather_icon = '/static/images/snow.jpg'
         }
 
+        // Populate webpage elements with weather info
         document.getElementById('weather-icon').src = weather_icon;
         document.getElementById('weather-desc').innerHTML = weather_desc;
         document.getElementById('temp-now').innerHTML = temp_now + '°C';
         document.getElementById('feels-like').innerHTML = feels_like + '°C';
-    }
-
-    // Create JSON data based on city id
-    var data_string = {'city_id': city_id, 'asdf': 'lol', 'test2': 'test2'};
-    var data_json = JSON.stringify(data_string);
-
-    // Send the data to Python, return false to prevent the page from reloading
-    request.send(data_json);
-    return false;
-};
+    })
+}
