@@ -39,11 +39,11 @@ function update() {
         document.getElementById('feels-like').innerHTML = feels_like + '°C';
     }
 
-    // Setup/prepare the data to be sent to Python by making a FormData object
-    const data = new FormData();
-    data.append('city_id', city_id)
+    // Create JSON data based on city id
+    var data_string = {'city_id': city_id, 'asdf': 'lol', 'test2': 'test2'};
+    var data_json = JSON.stringify(data_string);
 
     // Send the data to Python, return false to prevent the page from reloading
-    request.send(data);
+    request.send(data_json);
     return false;
 };
