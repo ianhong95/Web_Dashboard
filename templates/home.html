@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Home</title>
+
+<!-- Flask looks for files in the "static" folder -->
+<script src="{{ url_for('static', filename='js/get_weather.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<div>
+    <div class=weather-container>
+        <h1 class=title>TODAY'S WEATHER</h1>
+        <label for="select-city">Select a city:</label>
+        
+        <select name="select-city" id="select-city">
+            <option value="6066513">Markham</option>
+            <option value="6157718">Stouffville</option>
+            <option value="6167865">Toronto</option>
+        </select>
+        <br><br>
+
+        <img id=weather-icon class=weather-icon src="" alt="">
+        <strong id="weather-desc" class=weather-text for=""></strong>
+        <br><br>
+
+        <div class=temp-text>
+            <label for="">Temperature: </label>
+            <strong id="temp-now" for=""></strong>
+            <br>
+            <label for="">Feels like: </label>
+            <strong id="feels-like" for=""></strong>
+            <br>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
