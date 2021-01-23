@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function update() {
     var city_id = document.getElementById('select-city').value;
 
-    fetch('/', {    // Send a request to Flask server (POST request), passing city_id as a JSON object
+    fetch('/', {    // Send a request to Flask server (POST request), passing city_id as a JSON object, then chain actions
 
         headers: {'Content-Type': 'application/json'},
         method: 'POST',
@@ -15,12 +15,12 @@ function update() {
 
     }).then(function(response) {    // Get the response from Flask server
         return response.json();
-    }).then(function (json) {   // Run the following function with the json response from Python
+    }).then(function(json) {   // Run the following function with the json response from Python
         
         // Assign values from json response to variables
-        const weather_desc = json.weather_desc;
-        const temp_now = json.temp_now;
-        const feels_like = json.feels_like;
+        const weather_desc = json['weather_desc'];
+        const temp_now = json['temp_now'];
+        const feels_like = json['feels_like'];
         var weather_icon;
 
         // Weather icon logic
@@ -32,6 +32,8 @@ function update() {
             weather_icon = '/static/images/rain.jpg'
         } else if (weather_desc.includes('Snow')) {
             weather_icon = '/static/images/snow.jpg'
+        } else if (weather_desc.includes('Clear')) {
+            weather_icon = '/static/images/clear.jpg'
         }
 
         // Populate webpage elements with weather info

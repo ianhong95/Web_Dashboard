@@ -5,3 +5,5 @@ weather.http
 city.list.json
 /templates/test.html
 /venv
+test.http
+test.py

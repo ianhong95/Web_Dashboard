@@ -5,12 +5,13 @@
 
 <!-- Flask looks for files in the "static" folder -->
 <script src="{{ url_for('static', filename='js/get_weather.js') }}"></script>
+<script src="{{ url_for('static', filename='js/get_nba_games.js') }}"></script>
 {% endblock %}
 
 {% block body %}
-<div>
-    <div class=weather-container>
-        <h1 class=title>TODAY'S WEATHER</h1>
+<div class = "grid-container">
+    <div class="grid-item weather-container shadow-border">
+        <h1 class="title">TODAY'S WEATHER</h1>
         <label for="select-city">Select a city:</label>
         
         <select name="select-city" id="select-city">
@@ -20,11 +21,11 @@
         </select>
         <br><br>
 
-        <img id=weather-icon class=weather-icon src="" alt="">
+        <img id=weather-icon class="weather-icon" src="" alt="">
         <strong id="weather-desc" class=weather-text for=""></strong>
         <br><br>
 
-        <div class=temp-text>
+        <div class="temp-text cntr-text fade-in">
             <label for="">Temperature: </label>
             <strong id="temp-now" for=""></strong>
             <br>
@@ -32,7 +33,12 @@
             <strong id="feels-like" for=""></strong>
             <br>
         </div>
+    </div>
 
+    <div id='nbaInfo' class="grid-item nba-container shadow-border">
+        <h1 class="title">TODAY'S NBA GAMES</h1>
+            <p id="nbatest"></p>
+        <h2 ></h2>
     </div>
 
 </div>
